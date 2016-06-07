@@ -1,15 +1,8 @@
 <!-- public/views/nerd.html -->
 
-<div class="jumbotron text-center">
+<div class="jumbotron text-center" ng-controller="UserController">
 
-    <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#users" aria-controls="users" role="tab" data-toggle="tab">Users</a></li>
-        <li role="presentation"><a href="#create" aria-controls="create" role="tab" data-toggle="tab">Create</a></li>
-    </ul>
 
-    <!-- Tab panes -->
-    <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="users">
 
             <h1>Users</h1>
 
@@ -33,35 +26,6 @@
                 </tbody>
             </table>
 
-        </div>
-
-        <div role="tabpanel" class="tab-pane" id="create">
-
-            <h1>Create User</h1>
-            <form ng-submit="createUser()">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="name" ng-model="user.firstName" class="form-control" id="firstName" placeholder="First Name">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="name" ng-model="user.lastName" class="form-control" id="lastName" placeholder="Last Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="name" ng-model="user.email" class="form-control" id="email" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" ng-model="user.password" class="form-control" id="password" placeholder="Password">
-                </div>
-
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>
-
-
-        </div>
-    </div>
 
 
 

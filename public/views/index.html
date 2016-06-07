@@ -20,11 +20,12 @@
     <!-- ANGULAR CUSTOM -->
     <script src="js/controllers/MainCtrl.js"></script>
     <script src="js/controllers/UserCtrl.js"></script>
+    <script src="js/controllers/CreateUserCtrl.js"></script>
     <script src="js/services/UserService.js"></script>
     <script src="js/appRoutes.js"></script>
     <script src="js/app.js"></script>
 </head>
-<body ng-app="userApp" ng-controller="UserController">
+<body ng-app="userApp">
 <div class="container">
 
     <!-- HEADER -->
@@ -36,6 +37,7 @@
         <!-- LINK TO OUR PAGES. ANGULAR HANDLES THE ROUTING HERE -->
         <ul class="nav navbar-nav">
             <li><a href="/users">Users</a></li>
+            <li><a href="/create">Create User</a></li>
         </ul>
     </nav>
 

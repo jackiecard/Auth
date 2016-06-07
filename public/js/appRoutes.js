@@ -13,10 +13,15 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'MainController'
         })
 
-        // nerds page that will use the NerdController
         .when('/users', {
             templateUrl: 'views/users.html',
             controller: 'UserController'
+        })
+
+
+        .when('/create', {
+            templateUrl: 'views/create.html',
+            controller: 'CreateUserController'
         });
 
     $locationProvider.html5Mode(true);

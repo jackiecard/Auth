@@ -3,4 +3,4 @@
  */
 
 // public/js/app.js
-angular.module('userApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'UserCtrl', 'UserService']);
+angular.module('userApp', ['ngRoute', 'appRoutes', 'MainCtrl', 'UserCtrl', 'CreateUserCtrl', 'UserService']);

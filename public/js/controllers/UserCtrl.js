@@ -3,7 +3,7 @@
  */
 
 // public/js/controllers/UserCtrl.js
-angular.module('UserCtrl', []).controller('UserController', ['$scope', 'User', function($scope, User) {
+angular.module('UserCtrl', []).controller('UserController', ['$scope', 'User', '$location', function($scope, User, $location) {
 
 
 
@@ -18,21 +18,13 @@ angular.module('UserCtrl', []).controller('UserController', ['$scope', 'User', f
 
     $scope.user = {};
 
-    $scope.createUser = function() {
-        User.create($scope.user)
-            .then(function(response) {
-            alert("User created!");
-                getListUsers();
-        });
-    };
 
     $scope.deleteUser = function(id){
         console.log(id);
         User.delete(id).then(function(response) {
             alert("User deleted!");
 
-            // Fix refresh page after deleting user
-            getListUsers();
+            $location.path("/users");
         });
     }
 

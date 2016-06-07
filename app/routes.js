@@ -86,7 +86,7 @@ module.exports = function(app) {
                     if (err)
                         res.send(err);
 
-
+                    res.json("User removed!");
             });
 
         });

@@ -3,16 +3,17 @@
  */
 
 // public/js/controllers/UserCtrl.js
-angular.module('CreateUserCtrl', []).controller('CreateUserController', ['$scope', 'User', '$location', function($scope, User, $location) {
+angular.module('CreateUserCtrl', []).controller('CreateUserController', ['$scope', 'UserService', '$location', function($scope, UserService, $location) {
 
 
     $scope.user = {};
 
     $scope.createUser = function() {
-        User.create($scope.user)
+        UserService.create($scope.user)
             .then(function(response) {
                 alert("User created!");
-                $location.path("/users");
+                $location.path("/");
+                /*$location.path("/profile/" + response.data._id);*/
         });
     };
 

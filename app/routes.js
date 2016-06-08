@@ -48,7 +48,7 @@ module.exports = function(app) {
                 if (err)
                     res.send(err);
 
-                res.json(user); // return all Users in JSON format
+                res.json(user);
             });
         })
 
@@ -101,11 +101,11 @@ module.exports = function(app) {
         user.email = req.body.email;
 
         // save the User and check for errors
-        user.save(function(err) {
+        user.save(function(err, userCreated) {
             if (err)
                 res.send(err);
 
-            res.json(user);
+            res.json(userCreated);
         });
 
     });
@@ -191,6 +191,7 @@ module.exports = function(app) {
                 if (user) {
                     // handle login success
                     console.log('login success');
+                    res.json(user);
                     return;
                 }
 
@@ -198,6 +199,7 @@ module.exports = function(app) {
                 var reasons = User.failedLogin;
                 switch (reason) {
                     case reasons.NOT_FOUND:
+
                         console.log("User not found");
                         break;
                     case reasons.PASSWORD_INCORRECT:

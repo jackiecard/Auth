@@ -3,7 +3,7 @@
  */
 
 // public/js/services/UserService.js
-angular.module('UserService', []).service('User', ['$http', function($http) {
+angular.module('UserService', []).service('UserService', ['$http', function($http) {
 
     return {
         // call to GET all users
@@ -12,8 +12,13 @@ angular.module('UserService', []).service('User', ['$http', function($http) {
         },
 
         // call to GET all users
-        getById : function() {
+        getById : function(id) {
             return $http.get('/api/users/' + id);
+        },
+
+        // call to Authenticate
+        authenticate : function(credentials) {
+            return $http.post('/api/auth', credentials);
         },
 
         // these will work when more API routes are defined on the Node side of things

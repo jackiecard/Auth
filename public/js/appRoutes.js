@@ -22,6 +22,12 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         .when('/create', {
             templateUrl: 'views/create.html',
             controller: 'CreateUserController'
+        })
+
+
+        .when('/profile/:id', {
+            templateUrl: 'views/profile.html',
+            controller: 'ProfileController'
         });
 
     $locationProvider.html5Mode(true);

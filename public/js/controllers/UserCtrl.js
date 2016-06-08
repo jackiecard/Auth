@@ -3,13 +3,13 @@
  */
 
 // public/js/controllers/UserCtrl.js
-angular.module('UserCtrl', []).controller('UserController', ['$scope', 'User', '$route', function($scope, User, $route) {
+angular.module('UserCtrl', []).controller('UserController', ['$scope', 'UserService', '$route', function($scope, UserService, $route) {
 
 
 
     var getListUsers = function(){
         $scope.userList = [];
-        User.get().then(function(users) {
+        UserService.get().then(function(users) {
             $scope.userList = users.data;
         });
     }
@@ -20,7 +20,7 @@ angular.module('UserCtrl', []).controller('UserController', ['$scope', 'User', '
 
 
     $scope.deleteUser = function(id){
-        User.delete(id)
+        UserService.delete(id)
         .then(function(response) {
             alert("User deleted!");
 

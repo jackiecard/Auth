@@ -3,8 +3,17 @@
  */
 
 // public/js/controllers/MainCtrl.js
-angular.module('MainCtrl', []).controller('MainController', function($scope) {
+angular.module('MainCtrl', []).controller('MainController',['$scope', 'UserService', '$location', function($scope, UserService, $location) {
 
-    $scope.tagline = 'To the moon and back!';
+    $scope.credentials = {};
 
-});
+    $scope.signIn = function() {
+        UserService.authenticate($scope.credentials)
+            .then(function(response) {
+                alert("Successful");
+                $scope.id = response.data.userId;
+                $location.path("/profile/" + $scope.id);
+            });
+    };
+
+}]);

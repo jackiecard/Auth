@@ -94,11 +94,11 @@ module.exports = function(app) {
 
     // Post
     app.post('/api/users', function(req, res) {
+
         var user = new User();      // create a new instance of the User model
         user.firstName = req.body.firstName;
         user.lastName = req.body.lastName;
         user.email = req.body.email;
-        user.password = req.body.password;
 
         // save the User and check for errors
         user.save(function(err) {
@@ -107,59 +107,77 @@ module.exports = function(app) {
 
             res.json(user);
         });
+
     });
 
 
+        // AUTHENTICATION
 
 
+        // Create User
+        app.post('/api/sign', function(req, res) {
 
 
-    // AUTHENTICATION
+            // Creates User Model first
+            var user = new User();
+            user.firstName = req.body.firstName;
+            user.lastName = req.body.lastName;
+            user.email = req.body.email;
+
+            var credentials = new Credentials();
+
+            // save the User and check for errors
+            user.save(function(err) {
+                if (err) res.send(err);
+
+                res.json(user);
 
 
-    // Create User
-    app.post('/api/sign', function(req, res) {
-        var credentials = new Credentials({
-        username : req.body.username,
-        password : req.body.password});
-
-
-        // save user to database
-        credentials.save(function(err) {
-            if (err) throw err;
-
-            // attempt to authenticate user
-            Credentials.getAuthenticated(req.body.username, req.body.password, function(err, user, reason) {
-                if (err) throw err;
-
-                // login was successful if we have a user
-                if (user) {
-                    // handle login success
-                    console.log('login success');
-                    return;
-                }
-
-                // otherwise we can determine why we failed
-                var reasons = User.failedLogin;
-                switch (reason) {
-                    case reasons.NOT_FOUND:
-                        console.log("User not found");
-                        break;
-                    case reasons.PASSWORD_INCORRECT:
-                        console.log("Login Failed");
-                        // note: these cases are usually treated the same - don't tell
-                        // the user *why* the login failed, only that it did
-                        break;
-                    case reasons.MAX_ATTEMPTS:
-                        console.log("Login Failed!");
-                        // send email or otherwise notify user that account is
-                        // temporarily locked
-                        break;
-                }
             });
 
+            // Creates the credentials along with the UserID reference
+            credentials = new Credentials({
+                username : req.body.username,
+                password : req.body.password,
+                userId : user._id
+            });
+
+            // save user to database
+            credentials.save(function(err) {
+                if (err) throw err;
+
+                // attempt to authenticate user
+                Credentials.getAuthenticated(req.body.username, req.body.password, function(err, user, reason) {
+                    if (err) throw err;
+
+                    // login was successful if we have a user
+                    if (user) {
+                        // handle login success
+                        console.log('login success');
+                        return;
+                    }
+
+                    // otherwise we can determine why we failed
+                    var reasons = User.failedLogin;
+                    switch (reason) {
+                        case reasons.NOT_FOUND:
+                            console.log("User not found");
+                            break;
+                        case reasons.PASSWORD_INCORRECT:
+                            console.log("Login Failed");
+                            // note: these cases are usually treated the same - don't tell
+                            // the user *why* the login failed, only that it did
+                            break;
+                        case reasons.MAX_ATTEMPTS:
+                            console.log("Login Failed!");
+                            // send email or otherwise notify user that account is
+                            // temporarily locked
+                            break;
+                    }
+                });
+
+            });
         });
-    });
 
 
 
@@ -194,59 +212,15 @@ module.exports = function(app) {
                         break;
                 }
             });
-    });
+        });
 
 
 
 
+        // frontend routes =========================================================
+        // route to handle all angular requests
+        app.get('*', function(req, res) {
+            res.sendfile('./public/views/index.html'); // load our public/index.html file
+        });
 
-    // Auth
-    /*app.post('/api/authenticate', function(req, res) {
-     var credentials = new Credentials();      // create a new instance of the User model
-     credentials.username = req.body.username;
-     credentials.password = req.body.password;
-
-
-     Credentials.findOne({
-     username: req.body.username
-     }, function(err, user) {
-
-     if (err) throw err;
-
-     if (!user) {
-     res.json({ success: false, message: 'Authentication failed. User not found.' });
-     } else if (user) {
-
-     // check if password matches
-     if (user.password != req.body.password) {
-     res.json({ success: false, message: 'Authentication failed. Wrong password.' });
-     } else {
-
-     // if user is found and password is right
-     // create a token
-     var token = jwt.sign(user, app.get('superSecret'), {
-     expiresInMinutes: 1440 // expires in 24 hours
-     });
-
-     // return the information including token as JSON
-     res.json({
-     success: true,
-     message: 'Enjoy your token!',
-     token: token
-     });
-     }
-
-     }
-     });
-     });*/
-
-
-
-
-    // frontend routes =========================================================
-    // route to handle all angular requests
-    app.get('*', function(req, res) {
-        res.sendfile('./public/views/index.html'); // load our public/index.html file
-    });
-
-};
+    };

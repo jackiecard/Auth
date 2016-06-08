@@ -9,8 +9,7 @@ var User   = new Schema({
     id: Schema.Types.ObjectId,
     firstName: String,
     lastName: String,
-    email: String,
-    password: String
+    email: String
 });
 
 module.exports = mongoose.model('User', User);

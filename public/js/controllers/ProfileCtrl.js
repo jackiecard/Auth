@@ -8,6 +8,7 @@ angular.module('ProfileCtrl', []).controller('ProfileController', ['$scope', 'Us
     $scope.user = {};
 
     $scope.id = $routeParams.id;
+    $scope.username = $routeParams.username;
     console.log('param ' + $scope.id);
 
     UserService.getById($scope.id)

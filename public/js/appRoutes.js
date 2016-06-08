@@ -25,7 +25,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
         })
 
 
-        .when('/profile/:id', {
+        .when('/profile/:username/:id', {
             templateUrl: 'views/profile.html',
             controller: 'ProfileController'
         });

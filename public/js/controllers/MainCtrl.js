@@ -12,7 +12,7 @@ angular.module('MainCtrl', []).controller('MainController',['$scope', 'UserServi
             .then(function(response) {
                 alert("Successful");
                 $scope.id = response.data.userId;
-                $location.path("/profile/" + $scope.id);
+                $location.path("/profile/" + $scope.credentials.username + "/" + $scope.id);
             });
     };
 

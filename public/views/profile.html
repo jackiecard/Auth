@@ -6,15 +6,30 @@
     <h1>Profile</h1><br>
 
     <div class="row">
-        <div class="col-md-2"><div class="glyphicon glyphicon-user" style="background: silver; border-radius: 50px; font-size: 40px; padding: 20px;"></div> </div>
+        <div class="col-md-2 text-center">
+            <div class="glyphicon glyphicon-user" style="background: silver; border-radius: 50px; font-size: 40px; padding: 20px;"></div>
+            <p>{{username}}</p>
+        </div>
         <div class="col-md-10">
-            <p><b>Id:</b> {{user._id}}</p>
-            <p><b>First Name:</b> {{user.firstName}}</p>
-            <p><b>Last Name:</b> {{user.lastName}}</p>
-            <p><b>Email:</b> {{user.email}}</p>
+            <form ng-submit="editUser()">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="name" ng-model="user.firstName" class="form-control" id="firstName" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="name" ng-model="user.lastName" class="form-control" id="lastName" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="name" ng-model="user.email" class="form-control" id="email" placeholder="Email">
+                </div>
+            </form>
         </div>
     </div>
-    <p><button class="btn btn-info" style="float: right;" ng-click="">Edit</button> </p>
+    <p><button type="submit" class="btn btn-info" style="float: right;" ng-click="">Edit</button> </p>
+
+
 
 
 </div>

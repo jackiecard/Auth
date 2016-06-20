@@ -1,19 +1,14 @@
 <!-- public/views/home.html -->
 
 <div class="jumbotron text-center" ng-controller="MainController">
-    <h1>Sign in</h1>
+    <h1>Palindrome Checker</h1>
 
-    <form ng-submit="signIn()">
+    <form ng-submit="check()">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="name" ng-model="credentials.username" class="form-control" id="username" placeholder="Username">
+            <p>Please, write the word or setence on the field bellow:</p>
+            <input type="name" ng-model="str" class="form-control" id="str" placeholder="word or setence">
         </div>
-        <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" ng-model="credentials.password" class="form-control" id="password" placeholder="Password">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Sign In</button>
-        <a href="/create" class="btn btn-success">Sign Up</a>
+        <p>and</p>
+        <button type="submit" class="btn btn-primary">Check</button>
     </form>
 </div>

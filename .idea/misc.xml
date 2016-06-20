@@ -10,4 +10,9 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+  <component name="ProjectPlainTextFileTypeManager">
+    <file url="file://$PROJECT_DIR$/public/views/create.html" />
+    <file url="file://$PROJECT_DIR$/public/views/profile.html" />
+    <file url="file://$PROJECT_DIR$/public/views/users.html" />
+  </component>
 </project>

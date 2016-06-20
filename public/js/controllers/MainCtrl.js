@@ -1,18 +1,21 @@
-/**
- * Created by jackie on 6/6/16.
- */
 
 // public/js/controllers/MainCtrl.js
-angular.module('MainCtrl', []).controller('MainController',['$scope', 'UserService', '$location', function($scope, UserService, $location) {
+angular.module('MainCtrl', []).controller('MainController',['$scope', 'PalindromeService', '$location', function($scope, PalindromeService, $location) {
 
-    $scope.credentials = {};
+    $scope.str = "";
 
-    $scope.signIn = function() {
-        UserService.authenticate($scope.credentials)
+    $scope.check = function() {
+        PalindromeService.check({str: $scope.str})
             .then(function(response) {
-                alert("Successful");
-                $scope.id = response.data.userId;
-                $location.path("/profile/" + $scope.credentials.username + "/" + $scope.id);
+                if (response.status !==400) {
+                    alert($scope.str + response.data.message);
+                } else {
+                    return $q.reject(response.data);
+                }
+
+            }, function (response) {
+                alert($scope.str + response.data.message);
+                return $q.reject(response);
             });
     };
 
